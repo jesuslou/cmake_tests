@@ -1,5 +1,13 @@
 #include "CDependencyWhoAmI.h"
 #include <SFML/Graphics/View.hpp>
+#include <entityx/entityx.h>
+
+namespace ex = entityx;
+
+class Application : public ex::EntityX
+{
+public:
+};
 
 const char* CDependencyWhoAmI::TellWhoAmI()
 {

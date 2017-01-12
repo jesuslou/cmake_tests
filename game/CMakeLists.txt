@@ -13,6 +13,7 @@ cmake_minimum_required(VERSION 3.6)
 	add_dependency_subdirectory("WhoAmI" "${dependencies_folder}")
 	add_dependency_subdirectory("DependencyWhoAmI" "${dependencies_folder}")
 	add_dependency_subdirectory("SFML" "${dependencies_folder}")
+	add_dependency_subdirectory("entityx" "${dependencies_folder}")
 	
 	set(dependencies 
 		"WhoAmI"
@@ -21,6 +22,7 @@ cmake_minimum_required(VERSION 3.6)
 		"sfml-network"
 		"sfml-graphics"
 		"sfml-audio"
+		"entityx"
 	)
 	
 	generate_game(name "Game" dependencies "${dependencies}")

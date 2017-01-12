@@ -3,5 +3,6 @@ cmake_minimum_required(VERSION 3.6)
 set(dependencies 
 		"WhoAmI"
 		"sfml-graphics"
+		"entityx"
 	)
 generate_static_library(name "DependencyWhoAmI" dependencies "${dependencies}")

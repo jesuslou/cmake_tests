@@ -1,5 +1,13 @@
 #include "CGameWhoAmI.h"
 #include <SFML/Graphics/View.hpp>
+#include <entityx/entityx.h>
+
+namespace ex = entityx;
+
+class Application : public ex::EntityX
+{
+public:
+};
 
 const char* CGameWhoAmI::TellWhoAmI()
 {
