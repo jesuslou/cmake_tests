@@ -41,17 +41,13 @@ function (generate_static_library)
 	target_include_directories ("${lib_name}" PUBLIC "./include")
 	set_target_properties("${lib_name}" PROPERTIES LINKER_LANGUAGE CXX)
 	
-	if(lib_dependencies)
-		log("Dependencies for target ${lib_name}: ${lib_dependencies}")
-		foreach(dependency ${lib_dependencies})
-			target_link_libraries("${lib_name}" "${dependency}")
-		endforeach()
-	endif()
+	add_target_dependencies("${lib_name}" "${lib_dependencies}")
+	
 endfunction(generate_static_library)
 
 function (generate_game)
 	cmake_parse_arguments(game "" "name" "dependencies" ${ARGN})
-	
+
 	project("${game_name}")
 
 	include_directories("${CMAKE_CURRENT_SOURCE_DIR}/include")
@@ -67,13 +63,29 @@ function (generate_game)
 	set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT "${game_name}")
 	add_definitions(-DSFML_STATIC)
 	
-	if(game_dependencies)
-		log("Dependencies for target ${game_name}: ${game_dependencies}")
-		foreach(dependency ${game_dependencies})
-			target_link_libraries("${game_name}" "${dependency}")
+	add_target_dependencies("${game_name}" "${game_dependencies}")
+	
+endfunction(generate_game)
+
+function(add_target_dependencies target_name dependencies)
+	if(dependencies)
+		log("Dependencies for target ${target_name}: ${dependencies}")
+		foreach(dependency ${dependencies})
+			target_link_libraries("${target_name}" "${dependency}")
+			check_add_dependency_include_folder("${dependency}" "sfml" "${dependencies_folder}/SFML/include")
 		endforeach()
 	endif()
-endfunction(generate_game)
+endfunction(add_target_dependencies)
+
+function(check_add_dependency_include_folder dependency_name search_tag include_folder )
+	string(FIND "${dependency_name}" "${search_tag}" pos)
+	if(NOT "${pos}" STREQUAL "-1")
+		log("======= ${search_tag} found at ${pos}!")
+		include_directories("${include_folder}")
+	else()
+		log("======= ${search_tag} not found in ${dependency_name} (${pos})")
+	endif()
+endfunction(check_add_dependency_include_folder)
 
 function(add_dependency_subdirectory dependency_name output_dir)
 	add_subdirectory("${output_dir}/${dependency_name}" "${CMAKE_CURRENT_BINARY_DIR}/${dependency_name}")

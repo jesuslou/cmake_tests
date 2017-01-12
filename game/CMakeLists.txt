@@ -1,14 +1,14 @@
 cmake_minimum_required(VERSION 3.6)
-	include (${CMAKE_CURRENT_SOURCE_DIR}/../build/common.cmake)
-	
-	log("CMAKE_BINARY_DIR:         ${CMAKE_BINARY_DIR}" )
-	log("CMAKE_CURRENT_BINARY_DIR:         ${CMAKE_CURRENT_BINARY_DIR}" )
-	log("CMAKE_CURRENT_SOURCE_DIR:         ${CMAKE_CURRENT_SOURCE_DIR}" )
-	log("CMAKE_CURRENT_LIST_DIR:         ${CMAKE_CURRENT_LIST_DIR}" )
-	log("EXECUTABLE_OUTPUT_PATH:         ${EXECUTABLE_OUTPUT_PATH}" )
-	log("LIBRARY_OUTPUT_PATH:         ${LIBRARY_OUTPUT_PATH}" )
+	#message("CMAKE_BINARY_DIR:         	${CMAKE_BINARY_DIR}" )
+	#message("CMAKE_CURRENT_BINARY_DIR:		${CMAKE_CURRENT_BINARY_DIR}" )
+	#message("CMAKE_CURRENT_SOURCE_DIR:		${CMAKE_CURRENT_SOURCE_DIR}" )
+	#message("CMAKE_CURRENT_LIST_DIR:		${CMAKE_CURRENT_LIST_DIR}" )
+	#message("EXECUTABLE_OUTPUT_PATH:		${EXECUTABLE_OUTPUT_PATH}" )
+	#message("LIBRARY_OUTPUT_PATH:			${LIBRARY_OUTPUT_PATH}" )
 	
 	set(dependencies_folder "${CMAKE_SOURCE_DIR}/../dependencies/")
+	
+	include (${CMAKE_CURRENT_SOURCE_DIR}/../build/common.cmake)
 	
 	add_dependency_subdirectory("WhoAmI" "${dependencies_folder}")
 	add_dependency_subdirectory("DependencyWhoAmI" "${dependencies_folder}")
@@ -24,5 +24,4 @@ cmake_minimum_required(VERSION 3.6)
 	)
 	
 	generate_game(name "Game" dependencies "${dependencies}")
-
-	include_directories("${dependencies_folder}/SFML/include")
+	
