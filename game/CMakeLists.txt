@@ -10,9 +10,9 @@ cmake_minimum_required(VERSION 3.6)
 	
 	set(dependencies_folder "${CMAKE_SOURCE_DIR}/../dependencies/")
 	
-	add_dependency_subdirectory("WhoAmI" "${dependencies_folder}" "${dependencies_folder}/include")
-	add_dependency_subdirectory("DependencyWhoAmI" "${dependencies_folder}" "${dependencies_folder}/include")
-	add_dependency_subdirectory("SFML" "${dependencies_folder}" "${dependencies_folder}/SFML/include")
+	add_dependency_subdirectory("WhoAmI" "${dependencies_folder}")
+	add_dependency_subdirectory("DependencyWhoAmI" "${dependencies_folder}")
+	add_dependency_subdirectory("SFML" "${dependencies_folder}")
 	
 	set(dependencies 
 		"WhoAmI"
@@ -23,9 +23,6 @@ cmake_minimum_required(VERSION 3.6)
 		"sfml-audio"
 	)
 	
-	#include_directories("${dependencies_folder}/DependencyWhoAmI/include")
-	#add_subdirectory("${dependencies_folder}/DependencyWhoAmI")
-	
 	generate_game(name "Game" dependencies "${dependencies}")
 
-	#target_link_libraries( "Game" DependencyWhoAmI)
+	include_directories("${dependencies_folder}/SFML/include")
